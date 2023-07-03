@@ -1,0 +1,264 @@
+	// tried duplicate with different approach
+//	@SuppressWarnings("resource")
+//	public int duplicateExcel(String path1, String path2, int sheetNo1, int sheetNo2, int keyFile1, int keyFile2,
+//			String fileName1, String fileName2, String sheetName1, String sheetName2, String keyName1, String keyName2,
+//			String folderPath) {
+//
+//		System.out.println("InsideDuplicateExcel");
+//		System.out.println("path1:" + path1);
+//		System.out.println("path2:" + path2);
+//		System.out.println("sheetNo1:" + sheetNo1);
+//		System.out.println("sheetNo2:" + sheetNo2);
+//		System.out.println("keyFile1:" + keyFile1);
+//		System.out.println("keyFile2:" + keyFile2);
+//		System.out.println("fileName1:" + fileName1);
+//		System.out.println("fileName2:" + fileName2);
+//		System.out.println("sheetName1:" + sheetName1);
+//		System.out.println("sheetName2:" + sheetName2);
+//		System.out.println("keyName1:" + keyName1);
+//		System.out.println("keyName2:" + keyName2);
+//		System.out.println("folderPath:" + folderPath);
+//
+//		int countDuplicateMain = 0;
+//
+//		try {
+//
+//			String firstExcelPath = path1;
+//			FileInputStream file1 = new FileInputStream(firstExcelPath);
+//			XSSFWorkbook workBook1 = new XSSFWorkbook(file1);
+//			XSSFSheet sheet1 = workBook1.getSheetAt(sheetNo1);
+//
+//			String secondExcelPath = path2;
+//			FileInputStream file2 = new FileInputStream(secondExcelPath);
+//			XSSFWorkbook workBook2 = new XSSFWorkbook(file2);
+//			XSSFSheet sheet2 = workBook2.getSheetAt(sheetNo2);
+//
+//			// workBook1
+//			int totalNumberOfRowsInExcel1 = sheet1.getLastRowNum();
+//			int totalNumberOfColumnInExcel1 = sheet1.getRow(0).getLastCellNum();
+//			XSSFCell cellOfRowKey1;
+//
+//			// workBook2
+//			int totalNumberOfRowsInExcel2 = sheet2.getLastRowNum();
+//			int totalNumberOfColumnInExcel2 = sheet2.getRow(0).getLastCellNum();
+//			XSSFCell cellOfRowKey2;
+//
+//			int countDup = 0;
+//
+//			// going to Excel1 key -> row = 1 to last
+//			for (int r = 1; r <= totalNumberOfRowsInExcel1; r++) {
+//				if (sheet1.getRow(r) == null) {
+//					continue;
+//				} else {
+//					if (sheet1.getRow(r).getCell(keyFile1) == null) {
+//						continue;
+//					} else {
+//						cellOfRowKey1 = sheet1.getRow(r).getCell(keyFile1);
+//					}
+//
+//					System.out.println("cellOfRowKey1:" + cellOfRowKey1.toString());
+//
+//					// going to Excel2 key -> row = 1 to last
+//					for (int e = 1; e <= totalNumberOfRowsInExcel2; e++) {
+//						if (sheet2.getRow(e) == null) {
+//							continue;
+//						} else {
+//							if (sheet2.getRow(e).getCell(keyFile2) == null) {
+//								continue;
+//							} else {
+//								cellOfRowKey2 = sheet2.getRow(e).getCell(keyFile2);
+//							}
+//							System.out.println("cellOfRowKey2:" + cellOfRowKey2.toString());
+//
+//							if ((cellOfRowKey1.toString()).equals(cellOfRowKey2.toString())) {
+//								System.out.println("SameCells1:" + cellOfRowKey1 + "/" + cellOfRowKey2);
+//								countDup++;
+//								break;
+//							}
+//						}
+//					}
+//				}
+//			} // for
+//
+//			System.out.println("countDup:" + countDup);
+//
+//			if (countDup != 0) {
+//
+//				int totalNumberOfRowsOfNewDupSheet1 = countDup;
+//
+////				System.out.println("totalNumberOfRowsOfNewSheet1:" + totalNumberOfRowsOfNewDupSheet1);
+//
+//				// duplicateWorkBook1
+//				XSSFWorkbook workBookDup = new XSSFWorkbook();
+//				XSSFSheet sheetDup = workBookDup.createSheet();
+//				XSSFRow rowDup = null;
+//
+//				for (int r = 0; r <= totalNumberOfRowsOfNewDupSheet1; r++) {
+//					rowDup = sheetDup.createRow(r);
+//
+//					for (int c = 0; c < totalNumberOfColumnInExcel1; c++) {
+//						rowDup.createCell(c);
+//					}
+//				}
+//
+//				for (int p = 0, u = 0; p <= totalNumberOfRowsInExcel1; p++) {
+//
+//					if (sheet1.getRow(p) == null) {
+//						continue;
+//					} else {
+//
+//						rowDup = sheetDup.getRow(u);
+//
+//						if (sheet1.getRow(p).getCell(keyFile1) == null) {
+//							continue;
+//						} else {
+//							cellOfRowKey1 = sheet1.getRow(p).getCell(keyFile1);
+//						}
+//
+////						System.out.println("cellOfRowKey1:" + cellOfRowKey1);
+//
+//						for (int e = 0; e <= totalNumberOfRowsInExcel2; e++) {
+//
+//							if (sheet2.getRow(e) == null) {
+//								continue;
+//							} else if (sheet2.getRow(e).getCell(keyFile2) == null) {
+//								continue;
+//							} else {
+//								cellOfRowKey2 = sheet2.getRow(e).getCell(keyFile2);
+//							}
+//
+////							System.out.println("cellOfRowKey2:" + cellOfRowKey2);
+//
+//							if ((cellOfRowKey1.toString()).equals(cellOfRowKey2.toString())) {
+//
+////								System.out.println("Same:" + cellOfRowKey1 + "/" + cellOfRowKey2);
+//
+//								for (int d = 0; d < totalNumberOfColumnInExcel1; d++) {
+//									if (sheet1.getRow(p).getCell(d) == null) {
+//										continue;
+//									}
+//									if (sheet1.getRow(p).getCell(d).getCellType() == CellType.STRING) {
+//										rowDup.getCell(d)
+//												.setCellValue(sheet1.getRow(p).getCell(d).getStringCellValue());
+//									} else if (sheet1.getRow(p).getCell(d).getCellType() == CellType.NUMERIC) {
+//										rowDup.getCell(d)
+//												.setCellValue(sheet1.getRow(p).getCell(d).getNumericCellValue());
+//									} else if (sheet1.getRow(p).getCell(d).getCellType() == CellType.BOOLEAN) {
+//										rowDup.getCell(d)
+//												.setCellValue(sheet1.getRow(p).getCell(d).getBooleanCellValue());
+//									}
+//
+//								}
+//								u++;
+//							}
+//
+//						}
+//					}
+//				}
+//
+////            System.out.println("===================================================================");
+//
+//				int totalNumberOfRowsOfNewDupSheet2 = countDup;
+//
+////		    System.out.println("totalNumberOfRowsOfNewDupSheet2:" + totalNumberOfRowsOfNewDupSheet2);
+//
+//				// duplicateWorkBook2
+//				XSSFWorkbook workBookDup2 = new XSSFWorkbook();
+//				XSSFSheet sheetDup2 = workBookDup2.createSheet();
+//				XSSFRow rowDup2 = null;
+//
+//				for (int r = 0; r <= totalNumberOfRowsOfNewDupSheet2; r++) {
+//					rowDup2 = sheetDup2.createRow(r);
+//					for (int c = 0; c < totalNumberOfColumnInExcel2; c++) {
+//						rowDup2.createCell(c);
+//					}
+//				}
+//
+//				for (int p = 0, u = 0; p <= totalNumberOfRowsInExcel2; p++) {
+//
+//					if (sheet2.getRow(p) == null) {
+//						continue;
+//					} else {
+//						rowDup2 = sheetDup2.getRow(u);
+//
+//						if (sheet2.getRow(p).getCell(keyFile2) == null) {
+//							continue;
+//						} else {
+//							cellOfRowKey2 = sheet2.getRow(p).getCell(keyFile2);
+//						}
+//
+////						System.out.println("cellOfRowKey2:" + cellOfRowKey2);
+//
+//						for (int pp = 0; pp <= totalNumberOfRowsInExcel1; pp++) {
+//
+//							if (sheet1.getRow(pp) == null) {
+//								continue;
+//							}
+//							if (sheet1.getRow(pp).getCell(keyFile1) == null) {
+//								continue;
+//							} else {
+//								cellOfRowKey1 = sheet1.getRow(pp).getCell(keyFile1);
+//							}
+//
+////						System.out.println("cellOfRowKey1:" + cellOfRowKey1);
+//
+//							if ((cellOfRowKey2.toString()).equals(cellOfRowKey1.toString())) {
+//
+////								System.out.println(p);
+////								System.out.println("Same:" + cellOfRowKey2 + "/" + cellOfRowKey1);
+//
+//								for (int d = 0; d < totalNumberOfColumnInExcel2; d++) {
+//
+//									if (sheet2.getRow(p).getCell(d) == null) {
+//										continue;
+//									}
+//									if (sheet2.getRow(p).getCell(d).getCellType() == CellType.STRING) {
+//										rowDup2.getCell(d)
+//												.setCellValue(sheet2.getRow(p).getCell(d).getStringCellValue());
+//									} else if (sheet2.getRow(p).getCell(d).getCellType() == CellType.NUMERIC) {
+//										rowDup2.getCell(d)
+//												.setCellValue(sheet2.getRow(p).getCell(d).getNumericCellValue());
+//									} else if (sheet2.getRow(p).getCell(d).getCellType() == CellType.BOOLEAN) {
+//										rowDup2.getCell(d)
+//												.setCellValue(sheet2.getRow(p).getCell(d).getBooleanCellValue());
+//									}
+//
+//								}
+//								u++;
+//							}
+//						}
+//					}
+//				}
+//
+//				try {
+//					String target1Path1 = folderPath + "\\Duplicate_ComparedBy_" + keyName1 + "_" + sheetName1 + "_"
+//							+ fileName1;
+//					FileOutputStream outputStream11 = new FileOutputStream(target1Path1);
+//					workBookDup.write(outputStream11);
+//					workBookDup.close();
+//
+//					String target1Path2 = folderPath + "\\Duplicate_ComparedBy_" + keyName2 + "_" + sheetName2 + "_"
+//							+ fileName2;
+//					FileOutputStream outputStream22 = new FileOutputStream(target1Path2);
+//					workBookDup2.write(outputStream22);
+//					workBookDup2.close();
+//
+//				} catch (FileNotFoundException ee) {
+//					countDuplicateMain++;
+//					JOptionPane.showMessageDialog(ExcelTask.this,
+//							"Both files does'nt have Same data! No Excel created", "Excel", JOptionPane.ERROR_MESSAGE);
+//				}
+//			} else {
+//				JOptionPane.showMessageDialog(ExcelTask.this, "Both files does'nt have Same data! No Excel created",
+//						"Excel", JOptionPane.ERROR_MESSAGE);
+//			}
+//
+//			System.out.println("Duplicate......Done");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return countDuplicateMain;
+//
+//	}

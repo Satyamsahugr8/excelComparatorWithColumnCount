@@ -1,0 +1,25 @@
+# Make sure the sheet number should be correct while using configuration file and 
+# same for key as well.
+
+----------------------------------------------------------------------------------------------
+
+fileFolder = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles
+folderPath = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles\\Out
+
+file1 = 
+file2 = 
+
+sheetNo1 = 
+sheetNo2 = 
+
+key1 = 
+key2 = 
+
+
+
+############################################
+
+headerDropCount.addItem("");
+
+
+headerDropCount.addItem("" + row.getCell(c));

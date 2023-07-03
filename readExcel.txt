@@ -1,0 +1,27 @@
+// read excel
+//			System.out.println("excel2");
+//			int totalNumberOfRows2 = sheet2.getLastRowNum();
+//			int totalNumberOfColumn2 = sheet2.getRow(0).getLastCellNum();
+//
+//			System.out.println("totalNumberOfRows2:" + totalNumberOfRows2);
+//			System.out.println("totalNumberOfColumn2:" + totalNumberOfColumn2);
+//
+//			for (int r = 0; r <= totalNumberOfRows2; r++) {
+//				for (int c = 0; c < totalNumberOfColumn2; c++) {
+//					if (sheet2.getRow(r) == null) {
+//						continue;
+//					}
+//					if (sheet2.getRow(r).getCell(c) == null) {
+//						continue;
+//					}
+//					if (sheet2.getRow(r).getCell(c).getCellType() == CellType.STRING) {
+//						System.out.print(sheet2.getRow(r).getCell(c).getStringCellValue());
+//					} else if (sheet2.getRow(r).getCell(c).getCellType() == CellType.NUMERIC) {
+//						System.out.print(sheet2.getRow(r).getCell(c).getNumericCellValue());
+//					} else if (sheet2.getRow(r).getCell(c).getCellType() == CellType.BOOLEAN) {
+//						System.out.print(sheet2.getRow(r).getCell(c).getBooleanCellValue());
+//					}
+//				}
+//				System.out.println();
+//			}
+//			// excel read done
