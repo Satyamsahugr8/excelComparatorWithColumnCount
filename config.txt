@@ -6,20 +6,11 @@
 fileFolder = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles
 folderPath = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles\\Out
 
-file1 = 
-file2 = 
+file1 = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles\\Fresher Master Data .xlsx
+file2 = C:\\Users\\SATYASAH\\OneDrive - Capgemini\\Desktop\\BigexcelFiles\\HCMEL report.xlsx
 
-sheetNo1 = 
-sheetNo2 = 
+sheetNo1 = 3
+sheetNo2 = 0
 
-key1 = 
-key2 = 
-
-
-
-############################################
-
-headerDropCount.addItem("");
-
-
-headerDropCount.addItem("" + row.getCell(c));
+key1 = 1
+key2 = 0

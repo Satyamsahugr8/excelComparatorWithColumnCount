@@ -1,7 +1,6 @@
 package com.swing;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,7 +30,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.XLSBUnsupportedException;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -569,8 +567,6 @@ class Excel extends JFrame {
 			XSSFSheet sheetCreate1 = workBookOutput1.createSheet();
 			XSSFRow rowCreated = null;
 
-//									if (false) {
-
 			if (counter != 0) {
 
 				int totalNumberOfRowsOfNewSheet = totalNumberOfRowsInExcel1 - counter;
@@ -636,7 +632,7 @@ class Excel extends JFrame {
 			} // if counter close
 
 			else {
-
+				
 				if (sheet1.getLastRowNum() > 0) {
 					try {
 						System.out.println("Duplicate Excel1 created");
@@ -674,7 +670,6 @@ class Excel extends JFrame {
 			XSSFRow rowCreated2 = null;
 
 			if (counter2 != 0) {
-
 				int totalNumberOfRowsOfNewSheet2 = totalNumberOfRowsInExcel2 - counter2;
 
 				for (int r = 0; r <= totalNumberOfRowsOfNewSheet2; r++) {
@@ -738,7 +733,9 @@ class Excel extends JFrame {
 			} // if counter close
 			else {
 				if (sheet2.getLastRowNum() > 0) {
+
 					try {
+
 						System.out.println("Duplicate Excel2 created");
 						String target2Path2 = folderPath + "\\Duplicate2_ComparedBy_" + fileName2;
 						FileOutputStream outputStream2 = new FileOutputStream(target2Path2);
@@ -857,7 +854,6 @@ class Excel extends JFrame {
 				}
 			} // for
 
-
 			String firstExcelPathCopy = path1;
 			FileInputStream file1Copy = new FileInputStream(firstExcelPathCopy);
 			XSSFWorkbook workBook1Copy = new XSSFWorkbook(file1Copy);
@@ -890,7 +886,7 @@ class Excel extends JFrame {
 					} // for
 				}
 			} // for
-			
+
 			// Upto here we have to two excel with some null or empty row
 			// sheet1 and sheet2 as output only NO new sheet created
 
@@ -1095,7 +1091,6 @@ class Excel extends JFrame {
 //				}
 			}
 
-
 //-----------------------------------------------------------------------------------------------------------
 
 //			// upto unique data withOut Null row Completed
@@ -1104,7 +1099,7 @@ class Excel extends JFrame {
 //			} else {
 //
 //			}
-			
+
 			workBook1.close();
 			workBook2.close();
 			workBook1Copy.close();
@@ -1119,7 +1114,6 @@ class Excel extends JFrame {
 
 		return counterMain;
 	} // end of fetch method
-
 
 	// for configuration file 2
 	public int fetchExcel(String path1, String path2, int sheetNo1, int sheetNo2, int keyFile1, int keyFile2,
@@ -1435,7 +1429,6 @@ class Excel extends JFrame {
 					filePath2ForCount = target2Path2;
 					targetFolderForCount = folderPath;
 
-
 				} catch (FileNotFoundException ee) {
 					counterMain++;
 					JOptionPane.showMessageDialog(Excel.this, "files 2 does'nt have unique data No Excel created",
@@ -1454,7 +1447,7 @@ class Excel extends JFrame {
 			workBook1Copy.close();
 			workBookOutput1.close();
 			workBookOutput2.close();
-			
+
 			System.out.println("Unique......Done");
 
 		} catch (FileNotFoundException fe) {
@@ -1468,11 +1461,10 @@ class Excel extends JFrame {
 
 		return counterMain;
 	}
-	
-	
-	
-	private void countExcel(String filePath, String folderPath, int selectedCounted, String selectedCountedName) {
 
+	private int countExcel(String filePath, String folderPath, int selectedCounted, String selectedCountedName) {
+
+		int count = 0;
 		try {
 
 			FileInputStream file1Count = new FileInputStream(filePath);
@@ -1480,8 +1472,10 @@ class Excel extends JFrame {
 			XSSFSheet sheetCount = workBookCount.getSheetAt(0);
 
 			int totalNumberOfRowsInExcel1Count = sheetCount.getLastRowNum();
-			
+
 			int columnIndex = selectedCounted;
+			
+			int total = 0;
 
 			Set<String> set = new HashSet<>();
 
@@ -1506,31 +1500,47 @@ class Excel extends JFrame {
 				}
 			}
 
-//			for (int count : arr) {
+			for (int count1 : arr) {
 //				System.out.println(count);
-//			}
-
+				total += count1;
+			}
+			
 			// creating new working and adding new rows for excel1
 			XSSFWorkbook workBookOutput1 = new XSSFWorkbook();
 			XSSFSheet sheetCreate1 = workBookOutput1.createSheet();
 			XSSFRow rowCreated = null;
 
-			for (int r = 0; r < setToStringArr.length; r++) {
+			for (int r = 0; r <= setToStringArr.length; r++) {
 				rowCreated = sheetCreate1.createRow(r);
-				
+
 				for (int c = 0; c < 3; c++) {
 					rowCreated.createCell(c);
 				}
 			}
 
 			for (int c = 0; c < 3; c++) {
-				for (int i = 0; i < setToStringArr.length; i++) {
+				for (int i = 0; i <= setToStringArr.length; i++) {
+					
+					if(i < setToStringArr.length) {
+						
 					if (c == 0 && i == 0) {
 						sheetCreate1.getRow(i).getCell(c).setCellValue(selectedCountedName + ":");
 					} else if (c == 1) {
 						sheetCreate1.getRow(i).getCell(c).setCellValue(setToStringArr[i] + ":");
 					} else if (c == 2) {
 						sheetCreate1.getRow(i).getCell(c).setCellValue(arr[i]);
+					} 
+					
+					}
+					
+					if(i <= setToStringArr.length) {
+					
+					if (c == 1 && i == setToStringArr.length) {
+						sheetCreate1.getRow(i).getCell(c).setCellValue("total:");
+					} else if (c == 2 && i == setToStringArr.length) {
+						sheetCreate1.getRow(i).getCell(c).setCellValue(total);
+					}
+					
 					}
 				}
 			}
@@ -1539,17 +1549,24 @@ class Excel extends JFrame {
 
 			FileOutputStream outputStream11 = new FileOutputStream(targetPathCount);
 			workBookOutput1.write(outputStream11);
-			
+
 			workBookOutput1.close();
 			workBookCount.close();
 
+			JOptionPane.showMessageDialog(Excel.this, "Count Excel created", "Excel", JOptionPane.PLAIN_MESSAGE);
 			System.out.println("Count......Done");
 
+		} catch (NullPointerException ne) {
+			count++;
 		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+//			e1.printStackTrace();
+			count++;
 		} catch (IOException ee) {
-			ee.printStackTrace();
+//			ee.printStackTrace();
+			count++;
 		}
+
+		return count;
 
 	}
 
@@ -2520,24 +2537,28 @@ class Excel extends JFrame {
 
 		buttonCount.addActionListener((e) -> {
 			if (e.getSource() == buttonCount) {
-//				countExcel(String filePath, String folderPath, int selectedCounted, String selectedCountedName)
-				countExcel(filePathForCount, targetFolderForCount, selectedCounted, selectedCountedName);
+				int a = countExcel(filePathForCount, targetFolderForCount, selectedCounted, selectedCountedName);
 
-				int ii = JOptionPane.showConfirmDialog(null,
-						"We Have to close this window in order to open newly generated Excel, Because these are already open or are in use by javaw.exe Or if have to get more excels then click on No",
-						"Exit?", JOptionPane.YES_NO_OPTION);
-				if (ii == 1) {
-					// do nothing
-				}
-				if (ii == 0) {
-					try {
-						desktop.open(file);
-					} catch (IOException eeee) {
-						eeee.printStackTrace();
+				if (a < 1) {
+					int ii = JOptionPane.showConfirmDialog(null,
+							"We Have to close this window in order to open newly generated Excel, Because these are already open or are in use by javaw.exe Or if have to get more excels then click on No",
+							"Exit?", JOptionPane.YES_NO_OPTION);
+					if (ii == 1) {
+						// do nothing
 					}
-					System.exit(0);
+					if (ii == 0) {
+						try {
+							desktop.open(file);
+						} catch (IOException eeee) {
+							eeee.printStackTrace();
+						}
+						System.exit(0);
+					}
+				} else {
+					JOptionPane.showMessageDialog(Excel.this,
+							"Excels creation NOT DONE/File is missing - Something is missing!", "Excel !",
+							JOptionPane.ERROR_MESSAGE);
 				}
-
 			}
 		});
 
@@ -2556,7 +2577,6 @@ class Excel extends JFrame {
 			if (e.getSource() == headerDropCount2) {
 				selectedCounted2 = headerDropCount2.getSelectedIndex();
 				selectedCountedName2 = (String) headerDropCount2.getSelectedItem();
-
 			}
 		});
 
@@ -2567,22 +2587,29 @@ class Excel extends JFrame {
 		buttonCount2.addActionListener((e) -> {
 
 			if (e.getSource() == buttonCount2) {
-				countExcel(filePath2ForCount, targetFolderForCount, selectedCounted2, selectedCountedName2);
+				int a = countExcel(filePath2ForCount, targetFolderForCount, selectedCounted2, selectedCountedName2);
 
-				int ii = JOptionPane.showConfirmDialog(null,
-						"We Have to close this window in order to open newly generated Excel, Because these are already open or are in use by javaw.exe Or if have to get more excels then click on No",
-						"Exit?", JOptionPane.YES_NO_OPTION);
-				if (ii == 1) {
-					// do nothing
-				}
-				if (ii == 0) {
-					try {
-						desktop.open(file);
-					} catch (IOException eeee) {
-						eeee.printStackTrace();
+				if (a < 1) {
+					int ii = JOptionPane.showConfirmDialog(null,
+							"We Have to close this window in order to open newly generated Excel, Because these are already open or are in use by javaw.exe Or if have to get more excels then click on No",
+							"Exit?", JOptionPane.YES_NO_OPTION);
+					if (ii == 1) {
+						// do nothing
 					}
-					System.exit(0);
+					if (ii == 0) {
+						try {
+							desktop.open(file);
+						} catch (IOException eeee) {
+							eeee.printStackTrace();
+						}
+						System.exit(0);
+					}
+				} else {
+					JOptionPane.showMessageDialog(Excel.this,
+							"Excels creation NOT DONE/File is missing - Something is not good!", "Excel !",
+							JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
 		});
 
