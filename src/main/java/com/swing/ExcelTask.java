@@ -2556,7 +2556,7 @@ class Excel extends JFrame {
 					}
 				} else {
 					JOptionPane.showMessageDialog(Excel.this,
-							"Excels creation NOT DONE/File is missing - Something is missing!", "Excel !",
+							"Excels creation NOT DONE/File is missing - Something is wrong!", "Excel !",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -2606,7 +2606,7 @@ class Excel extends JFrame {
 					}
 				} else {
 					JOptionPane.showMessageDialog(Excel.this,
-							"Excels creation NOT DONE/File is missing - Something is not good!", "Excel !",
+							"Excels creation NOT DONE/File is missing - Something is wrong!", "Excel !",
 							JOptionPane.ERROR_MESSAGE);
 				}
 
