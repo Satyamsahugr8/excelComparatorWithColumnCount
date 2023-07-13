@@ -1589,17 +1589,12 @@ class Excel extends JFrame {
 	private JLabel displayFileName1 = new JLabel();
 	private JLabel displayFileName2 = new JLabel();
 	private JLabel displayOutputFolder = new JLabel();
-	private JLabel COUNT = new JLabel("COUNT1 :");
-	private JLabel COUNT2 = new JLabel("COUNT2 :");
-	private JComboBox<String> headerDrop = new JComboBox<String>();
-	private JComboBox<String> headerDropCount = new JComboBox<String>();
 	private JComboBox<String> headerDrop2 = new JComboBox<String>();
-	private JComboBox<String> headerDropCount2 = new JComboBox<String>();
+
+	private JComboBox<String> headerDrop = new JComboBox<String>();
 	private JButton buttonFile1 = new JButton("openFile1");
 	private JButton buttonFile2 = new JButton("openFile2");
 	private JButton buttonOutput = new JButton("openFolder");
-	private JButton buttonCount = new JButton("buttonCount");
-	private JButton buttonCount2 = new JButton("buttonCount2");
 	private JButton buttonENTER = new JButton("ENTER FOR UNIQUE");
 	private JButton buttonDUPLICATE = new JButton("ENTER FOR DUPLICATE");
 	private JButton buttonClear = new JButton("CLEAR");
@@ -1641,6 +1636,16 @@ class Excel extends JFrame {
 	String SystemFolderPath;
 
 	// count ki liye
+	private JLabel COUNT = new JLabel("COUNT1 :");
+	private JLabel COUNT2 = new JLabel("COUNT2 :");
+	
+
+	private JComboBox<String> headerDropCount = new JComboBox<String>();
+	private JComboBox<String> headerDropCount2 = new JComboBox<String>();
+
+	private JButton buttonCount = new JButton("buttonCount");
+	private JButton buttonCount2 = new JButton("buttonCount2");
+	
 	int selectedCounted;
 	String selectedCountedName;
 	int selectedCounted2;
